@@ -27,9 +27,9 @@ experiment_type = 'regular' # ood_min, ood_max
 
 # Load the extracted latent representations 
 X_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of train instances, embedding size]
-y_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of train instances] << sparse labels
+y_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of train instances,] << sparse labels
 X_test = torch.load(f"{dataset}_processed/{experiment_type}_test_embed.pth") # Size: [number of test instances, embedding size]
-y_test = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of test instances] << sparse labels
+y_test = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of test instances,] << sparse labels
 if "ood" in exp_type:
     ood = torch.load(f"{dataset}_processed/{exp_type}/{dataset}_{exp_type}_ood_embed.pth")
 else:
@@ -46,9 +46,7 @@ hidden_dim=X_train.shape[-1]
 n_classes=len(torch.unique(y_train))
 
 # Instantiate the last layer pyro model and the sampler
-LL_model = LL_BNN(prior_scale=prior, 
-                  hid_dim=hidden_dim, 
-                  out_dim=n_classes)
+LL_model = LL_BNN(prior_scale=prior, hid_dim=hidden_dim, out_dim=n_classes)
 nuts_kernel = NUTS(LL_model, jit_compile=True, target_accept_prob=target_accept) 
 mcmc = MCMC(nuts_kernel, num_samples=num_samples, warmup_steps=burnin_samples, num_chains=n_chains)
 
