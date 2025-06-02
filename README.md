@@ -31,7 +31,7 @@ y_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") #
 X_test = torch.load(f"{dataset}_processed/{experiment_type}_test_embed.pth") # Size: [number of test instances, embedding size]
 y_test = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of test instances,] << sparse labels
 if "ood" in exp_type:
-    ood = torch.load(f"{dataset}_processed/{exp_type}/{dataset}_{exp_type}_ood_embed.pth")
+    ood = torch.load(f"{dataset}_processed/{experiment_type}_ood_embed.pth")
 else:
     ood = None
 
