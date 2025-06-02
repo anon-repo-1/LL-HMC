@@ -21,15 +21,15 @@ np.random.seed(seed_number)
 from .evaluation import evaluate
 from .models import LL_BNN, VmappedLinearLayer
 
-
-experiment_type = 'regular' # ood_min, ood_max
+# define the dataset and experiment type
 dataset = 'aide' # b4c, road
+experiment_type = 'regular' # ood_min, ood_max
 
-# Load the extracted latent representations
-X_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # [number of train instances, embedding size]
-y_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # [number of train instances] << sparse labels
-X_test = torch.load(f"{dataset}_processed/{experiment_type}_test_embed.pth") #  [number of test instances, embedding size]
-y_test = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # [number of test instances] << sparse labels
+# Load the extracted latent representations 
+X_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of train instances, embedding size]
+y_train = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of train instances] << sparse labels
+X_test = torch.load(f"{dataset}_processed/{experiment_type}_test_embed.pth") # Size: [number of test instances, embedding size]
+y_test = torch.load(f"{dataset}_processed/{experiment_type}_train_embed.pth") # Size: [number of test instances] << sparse labels
 if "ood" in exp_type:
     ood = torch.load(f"{dataset}_processed/{exp_type}/{dataset}_{exp_type}_ood_embed.pth")
 else:
