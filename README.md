@@ -1,11 +1,11 @@
 # Last layer Hamiltonian Monte Carlo
 Implementation for the Last Layer Hamiltonian Monte Carlo paper.
 
-### Single chain LL-HMC example
+### Example to perform sampling and the evaluation
 
-To following LL-HMC example is for a single chain and expects that the latent representations are already extracted.
+The following LL-HMC example is for a single chain and expects that the latent representations from the base model are already extracted.
 After loading the data, define the last layer dimensions, and run the HMC sampling.
-Lastly, we use a model wrapper for the sampled parameters and run the evaluation.
+Lastly, we use a model wrapper for the sampled parameters and perform the evaluation.
 
 ```
 import torch
