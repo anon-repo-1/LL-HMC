@@ -1,4 +1,4 @@
-# LL-HMC
+# Last layer Hamiltonian Monte Carlo
 Implementation for the Last Layer Hamiltonian Monte Carlo paper.
 
 ### Single chain LL-HMC example
