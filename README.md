@@ -61,5 +61,5 @@ bias_samples = torch.concat([bias_samples, posterior_samples['layers.0.bias']])
 # Model torch wrapper for the sampled last layer parameters 
 model = VmappedLinearLayer(weight_samples, bias_samples)
 # Run the evaluation for the test dataset (and OOD instances)
-results = test_results(model_type=model_type, model=model, X_test=X_test, y_test=y_test, ood=ood)
+results = evaluate(model_type=model_type, model=model, X_test=X_test, y_test=y_test, ood=ood)
 ```
