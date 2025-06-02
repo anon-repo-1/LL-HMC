@@ -45,7 +45,7 @@ def compute_FPR95(uc_id, uc_ood):
     return result
 
 
-def pred_eval(model_type, model, X_test, y_test, ood=None):
+def evaluate(model_type, model, X_test, y_test, ood=None):
     num_classes = len(torch.unique(y_test))
     with torch.no_grad():
         if model_type == "llhmc":
