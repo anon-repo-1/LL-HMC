@@ -25,7 +25,6 @@ class LL_BNN(PyroModule):
         # Initialize weights and biases for each layer
         for layer_idx, layer in enumerate(self.layers):
             if pretrained_weights is not None and pretrained_biases is not None:
-                # Use priors if no pre-trained parameters are given
                 layer.weight = PyroSample(dist.Normal(pretrained_weights, prior_scale * np.sqrt(2 / self.layer_sizes[layer_idx]))
                                           .expand([self.layer_sizes[layer_idx + 1], self.layer_sizes[layer_idx]])
                                           .to_event(2))
@@ -34,7 +33,6 @@ class LL_BNN(PyroModule):
                                         .to_event(1))
              
             else:
-                # Use priors if no pre-trained parameters are given
                 layer.weight = PyroSample(dist.Normal(0., prior_scale * np.sqrt(2 / self.layer_sizes[layer_idx]))
                                           .expand([self.layer_sizes[layer_idx + 1], self.layer_sizes[layer_idx]])
                                           .to_event(2))
@@ -49,7 +47,6 @@ class LL_BNN(PyroModule):
         with pyro.plate("data", x.shape[0]):
             obs = pyro.sample("obs", dist.Categorical(probs=probs), obs=y)
         return probs
-
 
 class VmappedLinearLayer(torch.nn.Module):
     def __init__(self, weight_samples, bias_samples):
